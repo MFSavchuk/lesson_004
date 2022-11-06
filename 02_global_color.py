@@ -61,6 +61,27 @@ while True:
     else:
         print('Ошибка ввода !!! Повторите')
 
-draw(point=point_4, angle=33, length=100, corners=6, color=color)
+corners = 3
+while True:
+    print('Введите вариант:')
+    print('3 - Треугольник, 4 - Квадрат, 5 - Пятиугольник, 6 - Шестиугольник')
+    var = input()
+    if var == '3':
+        corners = 3
+        break
+    elif var == '4':
+        corners = 4
+        break
+    elif var == '5':
+        corners = 5
+        break
+    elif var == '6':
+        corners = 6
+        break
+    else:
+        print('Ошибка ввода!!!')
+
+
+draw(point=point_4, angle=33, length=100, corners=corners, color=color)
 
 sd.pause()
