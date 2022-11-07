@@ -44,42 +44,58 @@ sd.background_color = sd.COLOR_BLACK
 #     draw_bunches(start_point=v3.end_point, angle=angle + 30, length=length * .75)
 
 def draw_bunches_start(start_point, angle, length):
-    if length < 10:
-        return
     v1 = sd.get_vector(start_point=start_point, angle=angle, length=length)
-    v1.draw(color=sd.random_color())
-    v2 = sd.get_vector(start_point=v1.end_point, angle=angle - sd.random_number(21, 42),
-                       length=length * (sd.random_number(6, 8) / 10))
-    v2.draw(color=sd.random_color())
+    v1.draw(color=sd.COLOR_DARK_GREEN)
 
-    v3 = sd.get_vector(start_point=v1.end_point, angle=angle + sd.random_number(21, 42),
-                       length=length * (sd.random_number(6, 8) / 10))
-    v3.draw(color=sd.random_color())
+    delta_angle = 30
+    delta_length = (sd.random_number(6, 9)) / 10
+    angle_1 = angle - delta_angle
+    angle_2 = angle + delta_angle
+    length = length * delta_length
 
-    draw_bunches_continuation(start_point=v2.end_point, angle=angle, length=length)
-    draw_bunches_continuation(start_point=v3.end_point, angle=angle, length=length)
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle_1,
+                       length=length)
+    v2.draw(color=sd.COLOR_DARK_GREEN)
 
+    v3 = sd.get_vector(start_point=v1.end_point, angle=angle_2,
+                       length=length)
+    v3.draw(color=sd.COLOR_DARK_GREEN)
+
+    delta_angle = sd.random_number(21, 42)
+    delta_length = (sd.random_number(6, 9)) / 10
+    angle_1 = angle_1 - delta_angle/2
+    angle_2 = angle_2 + delta_angle/2
+    length = length * delta_length
+
+    draw_bunches_continuation(start_point=v2.end_point, angle=angle_1, length=length)
+    draw_bunches_continuation(start_point=v2.end_point, angle=angle_2, length=length)
+    draw_bunches_continuation(start_point=v3.end_point, angle=angle_1, length=length)
+    draw_bunches_continuation(start_point=v3.end_point, angle=angle_2, length=length)
 
 def draw_bunches_continuation(start_point, angle, length):
-    if length < 5:
+    if length < 3:
         return
 
-    v2 = sd.get_vector(start_point=start_point, angle=angle - sd.random_number(21, 42),
-                       length=length * (sd.random_number(6, 8) / 10))
+    v2 = sd.get_vector(start_point=start_point, angle=angle,
+                       length=length)
     v2.draw(color=sd.random_color())
 
-    v3 = sd.get_vector(start_point=start_point, angle=angle + sd.random_number(21, 42),
-                       length=length * (sd.random_number(6, 8) / 10))
+    v3 = sd.get_vector(start_point=start_point, angle=angle,
+                       length=length)
     v3.draw(color=sd.random_color())
 
-    draw_bunches_start(start_point=v2.end_point, angle=angle - sd.random_number(21, 42),
-                       length=length * (sd.random_number(6, 9) / 10))
-    draw_bunches_start(start_point=v3.end_point, angle=angle + sd.random_number(21, 42),
-                       length=length * (sd.random_number(6, 9) / 10))
+    delta_angle = sd.random_number(21, 42)
+    delta_length = (sd.random_number(6, 9)) / 10
+    angle_1 = angle - delta_angle/2
+    angle_2 = angle + delta_angle/2
+    length = length * delta_length
+
+    draw_bunches_continuation(start_point=v2.end_point, angle=angle_1, length=length)
+    draw_bunches_continuation(start_point=v3.end_point, angle=angle_2, length=length)
 
 
 root_point = sd.get_point(600, 0)
-draw_bunches_start(start_point=root_point, angle=85, length=50)
+draw_bunches_start(start_point=root_point, angle=90, length=100)
 
 # 4) Усложненное задание (делать по желанию)
 # - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
