@@ -2,6 +2,9 @@
 
 import simple_draw as sd
 
+sd.resolution = (1200, 600)
+
+
 # 1) Написать функцию draw_branches, которая должна рисовать две ветви дерева из начальной точки
 # Функция должна принимать параметры:
 # - точка начала рисования,
@@ -26,7 +29,41 @@ import simple_draw as sd
 
 # можно поиграть -шрифтами- цветами и углами отклонения
 
-# TODO здесь ваш код
+
+# def draw_bunches(start_point, angle, length):
+#     if length < 3:
+#         return
+#     v1 = sd.get_vector(start_point=start_point, angle=angle, length=length)
+#     v1.draw()
+#     v2 = sd.get_vector(start_point=v1.end_point, angle=angle - 30, length=length * .75)
+#     v2.draw()
+#     v3 = sd.get_vector(start_point=v1.end_point, angle=angle + 30, length=length * .75)
+#     v3.draw()
+#     draw_bunches(start_point=v2.end_point, angle=angle - 30, length=length * .75)
+#     draw_bunches(start_point=v3.end_point, angle=angle + 30, length=length * .75)
+
+def draw_bunches(start_point, angle, length):
+    if length < 2:
+        return
+    v1 = sd.get_vector(start_point=start_point, angle=angle, length=length)
+    v1.draw()
+
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle - sd.random_number(21, 42),
+                       length=length * (sd.random_number(6, 9) / 10))
+    v2.draw()
+
+    v3 = sd.get_vector(start_point=v1.end_point, angle=angle + sd.random_number(21, 42),
+                       length=length * (sd.random_number(6, 9) / 10))
+    v3.draw()
+
+    draw_bunches(start_point=v2.end_point, angle=angle - sd.random_number(21, 42),
+                 length=length * (sd.random_number(6, 9) / 10))
+    draw_bunches(start_point=v3.end_point, angle=angle + sd.random_number(21, 42),
+                 length=length * (sd.random_number(6, 9) / 10))
+
+
+root_point = sd.get_point(600, 0)
+draw_bunches(start_point=root_point, angle=85, length=70)
 
 # 4) Усложненное задание (делать по желанию)
 # - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
@@ -37,5 +74,3 @@ import simple_draw as sd
 # sd.random_number()
 
 sd.pause()
-
-
