@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import simple_draw as sd
-
-sd.resolution = (1200, 600)
-sd.background_color = sd.COLOR_BLACK
-
-
 # 1) Написать функцию draw_branches, которая должна рисовать две ветви дерева из начальной точки
 # Функция должна принимать параметры:
 # - точка начала рисования,
@@ -43,6 +37,23 @@ sd.background_color = sd.COLOR_BLACK
 #     draw_bunches(start_point=v2.end_point, angle=angle - 30, length=length * .75)
 #     draw_bunches(start_point=v3.end_point, angle=angle + 30, length=length * .75)
 
+# 4) Усложненное задание (делать по желанию)
+# - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
+# - сделать рандомное отклонение длины ветвей в пределах 20% от коэффициента 0.75
+# Возможный результат решения см lesson_004/results/exercise_04_fractal_02.jpg
+
+# Пригодятся функции
+# sd.random_number()
+
+# pip install simple_draw - Установка
+
+
+import simple_draw as sd
+
+sd.resolution = (800, 600)
+sd.background_color = sd.COLOR_BLACK
+
+
 def draw_bunches_start(start_point, angle, length):
     v1 = sd.get_vector(start_point=start_point, angle=angle, length=length)
     v1.draw(color=sd.COLOR_DARK_GREEN)
@@ -61,28 +72,13 @@ def draw_bunches_start(start_point, angle, length):
                        length=length)
     v3.draw(color=sd.COLOR_DARK_GREEN)
 
-    delta_angle = sd.random_number(21, 42)
-    delta_length = (sd.random_number(6, 9)) / 10
-    angle_1 = angle_1 - delta_angle/2
-    angle_2 = angle_2 + delta_angle/2
-    length = length * delta_length
-
     draw_bunches_continuation(start_point=v2.end_point, angle=angle_1, length=length)
-    draw_bunches_continuation(start_point=v2.end_point, angle=angle_2, length=length)
-    draw_bunches_continuation(start_point=v3.end_point, angle=angle_1, length=length)
     draw_bunches_continuation(start_point=v3.end_point, angle=angle_2, length=length)
 
+
 def draw_bunches_continuation(start_point, angle, length):
-    if length < 4:
+    if length < 3:
         return
-
-    v2 = sd.get_vector(start_point=start_point, angle=angle,
-                       length=length)
-    v2.draw(color=sd.random_color())
-
-    v3 = sd.get_vector(start_point=start_point, angle=angle,
-                       length=length)
-    v3.draw(color=sd.random_color())
 
     delta_angle = sd.random_number(21, 42)
     delta_length = (sd.random_number(6, 9)) / 10
@@ -90,19 +86,19 @@ def draw_bunches_continuation(start_point, angle, length):
     angle_2 = angle + delta_angle
     length = length * delta_length
 
+    v2 = sd.get_vector(start_point=start_point, angle=angle_1,
+                       length=length)
+    v2.draw(color=sd.random_color())
+
+    v3 = sd.get_vector(start_point=start_point, angle=angle_2,
+                       length=length)
+    v3.draw(color=sd.random_color())
+
     draw_bunches_continuation(start_point=v2.end_point, angle=angle_1, length=length)
     draw_bunches_continuation(start_point=v3.end_point, angle=angle_2, length=length)
 
 
-root_point = sd.get_point(600, 0)
-draw_bunches_start(start_point=root_point, angle=90, length=150)
-
-# 4) Усложненное задание (делать по желанию)
-# - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
-# - сделать рандомное отклонение длины ветвей в пределах 20% от коэффициента 0.75
-# Возможный результат решения см lesson_004/results/exercise_04_fractal_02.jpg
-
-# Пригодятся функции
-# sd.random_number()
+root_point = sd.get_point(400, -50)
+draw_bunches_start(start_point=root_point, angle=90, length=100)
 
 sd.pause()
