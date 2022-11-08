@@ -55,7 +55,7 @@ sd.background_color = sd.COLOR_BLACK
 
 
 def draw_bunches_start(start_point, angle, length):
-    v1 = sd.get_vector(start_point=start_point, angle=angle, length=length)
+    v1 = sd.get_vector(start_point=start_point, angle=angle, length=length, width=4)
     v1.draw(color=sd.COLOR_DARK_GREEN)
 
     delta_angle = sd.random_number(21, 42)
@@ -65,11 +65,11 @@ def draw_bunches_start(start_point, angle, length):
     length = length * delta_length
 
     v2 = sd.get_vector(start_point=v1.end_point, angle=angle_1,
-                       length=length)
+                       length=length, width=4)
     v2.draw(color=sd.COLOR_DARK_GREEN)
 
     v3 = sd.get_vector(start_point=v1.end_point, angle=angle_2,
-                       length=length)
+                       length=length, width=4)
     v3.draw(color=sd.COLOR_DARK_GREEN)
 
     draw_bunches_continuation(start_point=v2.end_point, angle=angle_1, length=length)
@@ -77,7 +77,7 @@ def draw_bunches_start(start_point, angle, length):
 
 
 def draw_bunches_continuation(start_point, angle, length):
-    if length < 3:
+    if length < 2:
         return
 
     delta_angle = sd.random_number(21, 42)
@@ -99,6 +99,6 @@ def draw_bunches_continuation(start_point, angle, length):
 
 
 root_point = sd.get_point(400, -50)
-draw_bunches_start(start_point=root_point, angle=90, length=100)
+draw_bunches_start(start_point=root_point, angle=90, length=120)
 
 sd.pause()
