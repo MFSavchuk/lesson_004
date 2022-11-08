@@ -19,22 +19,30 @@ N = 20
 # TODO здесь ваш код
 
 x = [50, 100, 150, 200, 250, 300]
-y = 500
 
 
-def generate(x, y, length):
+def generate(y_0):
+    x1 = [50, 300]
+    # sd.start_drawing()
     while True:
+        for x2 in x1:
+            point_0 = sd.get_point(x2, y_0)
+            sd.snowflake(center=point_0, length=50, color=sd.background_color)
+            sd.snowflake(center=point_0, length=50, color=sd.COLOR_WHITE)
+
+
+        y_0 -= 10
+        sd.snowflake(center=point_0, length=50, color=sd.background_color)
         sd.clear_screen()
-        point_0 = sd.get_point(x, y)
-        sd.snowflake(center=point_0, length=length)
         sd.sleep(0.1)
-        y -= 10
-        if y < 50:
+        if y_0 < 50:
+            break
+        generate(y_0)
+        if sd.user_want_exit():
             break
 
-for x in x:
-    generate(x=x, y=500, length=50)
-    generate(x=500, y=500, length=50)
+generate(300)
+
 
 # while True:
 #     sd.clear_screen()
