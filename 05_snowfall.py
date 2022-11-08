@@ -2,7 +2,6 @@
 
 import simple_draw as sd
 
-
 # На основе кода из практической части реализовать снегопад:
 # - создать списки данных для отрисовки N снежинок
 # - нарисовать падение этих N снежинок
@@ -18,14 +17,61 @@ N = 20
 # sd.user_want_exit()
 
 # TODO здесь ваш код
-while True:
-    sd.clear_screen()
-    pass
-    pass
-    pass
-    sd.sleep(0.1)
-    if sd.user_want_exit():
-        break
+
+x = [50, 100, 150, 200, 250, 300]
+y = 500
+
+
+def generate(x, y, length):
+    while True:
+        sd.clear_screen()
+        point_0 = sd.get_point(x, y)
+        sd.snowflake(center=point_0, length=length)
+        sd.sleep(0.1)
+        y -= 10
+        if y < 50:
+            break
+
+for x in x:
+    generate(x=x, y=500, length=50)
+    generate(x=500, y=500, length=50)
+
+# while True:
+#     sd.clear_screen()
+#     for x in x:
+#         point = sd.get_point(x, y)
+#         sd.snowflake(center=point, length=50)
+#
+#         sd.sleep(0.1)
+#
+#     if sd.user_want_exit():
+#         break
+
+# y = 500
+# x = 100
+#
+# y2 = 450
+# x2 = 150
+# while True:
+#     sd.clear_screen()
+#     point = sd.get_point(x, y)
+#     sd.snowflake(center=point, length=50)
+#     y -= 10
+#     if y < 50:
+#        break
+#     x = x + 10
+#
+#     point2 = sd.get_point(x2, y2)
+#     sd.snowflake(center=point2, length=30)
+#     y2 -= 10
+#     if y2 < 50:
+#        break
+#     x2 = x2 + 20
+#
+#     sd.sleep(0.1)
+#     if sd.user_want_exit():
+#         break
+
 
 sd.pause()
 
@@ -43,5 +89,3 @@ sd.pause()
 # - сделать сугоб внизу экрана - если снежинка долетает до низа, оставлять её там,
 #   и добавлять новую снежинку
 # Результат решения см https://youtu.be/XBx0JtxHiLg
-
-
