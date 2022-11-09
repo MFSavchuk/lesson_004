@@ -17,11 +17,10 @@ sd.background_color = sd.COLOR_BLACK
 # sd.random_number()
 # sd.user_want_exit()
 
-N = 40  # количество снежинок
+N = 25  # количество снежинок
 x_cords = []  # координаты x
 y_cords = []  # координаты y
 sizes = []  # размеры снежинок
-snowflakes = []  # список снежинок
 factor_a = []
 factor_b = []
 factor_c = []
@@ -32,6 +31,7 @@ while True:
         print('Завалило весь экран')
         sd.pause()
         break
+
     for i in range(N):
         random = sd.random_number(0, 600)
         x_cords.append(random)
@@ -39,7 +39,7 @@ while True:
         random = sd.random_number(600, 1200)
         y_cords.append(random)
 
-        random = sd.random_number(15, 50)
+        random = sd.random_number(25, 50)
         sizes.append(random)
 
         random = float((sd.random_number(50, 70)) / 100)
@@ -54,11 +54,11 @@ while True:
     while True:
         sd.start_drawing()
         if max(y_cords) < 700:
-            count += 20
+            count += 17
             break
 
         for i in range(len(y_cords)):
-            if y_cords[i] < sd.random_number(0+count, 24+count):
+            if y_cords[i] < 10 + count:
                 center_point = sd.get_point(x_cords[i], y_cords[i])
                 sd.snowflake(center=center_point, length=sizes[i], color=sd.COLOR_WHITE, factor_a=factor_a[i],
                              factor_b=factor_b[i], factor_c=factor_c[i])
@@ -67,7 +67,7 @@ while True:
             center_point = sd.get_point(x_cords[i], y_cords[i])
             sd.snowflake(center=center_point, length=sizes[i], color=sd.background_color, factor_a=factor_a[i],
                          factor_b=factor_b[i], factor_c=factor_c[i])
-            y_cords[i] -= sd.random_number(2, 10)
+            y_cords[i] -= sd.random_number(6, 10)
             wind = sd.random_number(-5, 5)
             x_cords[i] -= wind
             center_point = sd.get_point(x_cords[i], y_cords[i])
