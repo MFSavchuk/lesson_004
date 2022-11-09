@@ -28,8 +28,8 @@ factor_c = []
 count = 0  # счетчик для увеличения сугроба
 
 while True:
-    if count > 100:
-        print('Высота сугроба 100мм')
+    if count > 600:
+        print('Завалило весь экран')
         break
     for i in range(N):
         random = sd.random_number(0, 600)
@@ -51,8 +51,8 @@ while True:
         factor_c.append(random)
 
     while True:
-        sd.clear_screen()
-        if max(y_cords) < 500:
+        sd.start_drawing()
+        if max(y_cords) < 700:
             count += 20
             break
 
@@ -63,13 +63,18 @@ while True:
                              factor_b=factor_b[i], factor_c=factor_c[i])
                 continue
 
-            wind = sd.random_number(-5, 5)
-            center_point = sd.get_point(x_cords[i] - wind, y_cords[i])
-            sd.snowflake(center=center_point, length=sizes[i], color=sd.COLOR_WHITE, factor_a=factor_a[i],
+            center_point = sd.get_point(x_cords[i], y_cords[i])
+            sd.snowflake(center=center_point, length=sizes[i], color=sd.background_color, factor_a=factor_a[i],
                          factor_b=factor_b[i], factor_c=factor_c[i])
             y_cords[i] -= sd.random_number(2, 10)
+            wind = sd.random_number(-5, 5)
+            x_cords[i] -= wind
+            center_point = sd.get_point(x_cords[i], y_cords[i])
+            sd.snowflake(center=center_point, length=sizes[i], color=sd.COLOR_WHITE, factor_a=factor_a[i],
+                         factor_b=factor_b[i], factor_c=factor_c[i])
 
-        sd.sleep(0.1)
+        sd.finish_drawing()
+        sd.sleep(0.0001)
         if sd.user_want_exit():
             break
 sd.pause()
