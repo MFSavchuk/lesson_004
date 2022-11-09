@@ -52,7 +52,7 @@ while True:
 
     while True:
         sd.clear_screen()
-        if max(y_cords) < 50+count:
+        if max(y_cords) < 500:
             count += 20
             break
 
