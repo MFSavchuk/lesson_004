@@ -55,6 +55,7 @@ sd.background_color = sd.COLOR_BLACK
 
 
 def draw_bunches_start(start_point, angle, length):
+    sd.start_drawing()  # закоментировать строку, если нужено видеть процесс рисования
     v1 = sd.get_vector(start_point=start_point, angle=angle, length=length, width=4)
     v1.draw(color=sd.COLOR_DARK_GREEN)
 
@@ -74,6 +75,7 @@ def draw_bunches_start(start_point, angle, length):
 
     draw_bunches_continuation(start_point=v2.end_point, angle=angle_1, length=length)
     draw_bunches_continuation(start_point=v3.end_point, angle=angle_2, length=length)
+    sd.finish_drawing()  # закоментировать строку, если нужено видеть процесс рисования
 
 
 def draw_bunches_continuation(start_point, angle, length):
