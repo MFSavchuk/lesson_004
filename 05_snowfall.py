@@ -74,7 +74,7 @@ while True:
                          factor_b=factor_b[i], factor_c=factor_c[i])
 
         sd.finish_drawing()
-        sd.sleep(0.0001)
+        sd.sleep(0.1)
         if sd.user_want_exit():
             break
 sd.pause()
