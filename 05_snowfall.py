@@ -17,7 +17,7 @@ sd.background_color = sd.COLOR_BLACK
 # sd.random_number()
 # sd.user_want_exit()
 
-N = 30  # количество снежинок
+N = 40  # количество снежинок
 x_cords = []  # координаты x
 y_cords = []  # координаты y
 sizes = []  # размеры снежинок
@@ -30,6 +30,7 @@ count = 0  # счетчик для увеличения сугроба
 while True:
     if count > 600:
         print('Завалило весь экран')
+        sd.pause()
         break
     for i in range(N):
         random = sd.random_number(0, 600)
@@ -57,7 +58,7 @@ while True:
             break
 
         for i in range(len(y_cords)):
-            if y_cords[i] < sd.random_number(25+count, 49+count):
+            if y_cords[i] < sd.random_number(0+count, 24+count):
                 center_point = sd.get_point(x_cords[i], y_cords[i])
                 sd.snowflake(center=center_point, length=sizes[i], color=sd.COLOR_WHITE, factor_a=factor_a[i],
                              factor_b=factor_b[i], factor_c=factor_c[i])
@@ -77,7 +78,6 @@ while True:
         sd.sleep(0.1)
         if sd.user_want_exit():
             break
-sd.pause()
 
 # подсказка! для ускорения отрисовки можно
 #  - убрать clear_screen()
