@@ -2,12 +2,13 @@
 
 import simple_draw as sd
 
+sd.background_color = sd.COLOR_BLACK
+
 # На основе кода из практической части реализовать снегопад:
 # - создать списки данных для отрисовки N снежинок
 # - нарисовать падение этих N снежинок
 # - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
 
-N = 20
 
 # Пригодятся функции
 # sd.get_point()
@@ -16,71 +17,57 @@ N = 20
 # sd.random_number()
 # sd.user_want_exit()
 
-# TODO здесь ваш код
+N = 30  # количество снежинок
 
-x = [50, 100, 150, 200, 250, 300]
+while True:
+    x_cords = []  # координаты x
+    y_cords = []  # координаты y
+    sizes = []  # размеры снежинок
+    snowflakes = []  # список снежинок
+    factor_a = []
+    factor_b = []
+    factor_c = []
+    all_cords_y = []
 
+    for i in range(N):
+        random = sd.random_number(20, 580)
+        x_cords.append(random)
 
-def generate(y_0):
-    x1 = [50, 300]
-    # sd.start_drawing()
+        random = sd.random_number(600, 1200)
+        y_cords.append(random)
+
+        random = sd.random_number(5, 50)
+        sizes.append(random)
+
+        random = float((sd.random_number(50, 70)) / 100)
+        factor_a.append(random)
+
+        random = float((sd.random_number(20, 40)) / 100)
+        factor_b.append(random)
+
+        random = sd.random_number(55, 65)
+        factor_c.append(random)
+
     while True:
-        for x2 in x1:
-            point_0 = sd.get_point(x2, y_0)
-            sd.snowflake(center=point_0, length=50, color=sd.background_color)
-            sd.snowflake(center=point_0, length=50, color=sd.COLOR_WHITE)
-
-
-        y_0 -= 10
-        sd.snowflake(center=point_0, length=50, color=sd.background_color)
         sd.clear_screen()
-        sd.sleep(0.1)
-        if y_0 < 50:
+        for i in range(N):
+            if y_cords[i] < 15:
+                center_point = sd.get_point(x_cords[i], y_cords[i])
+                sd.snowflake(center=center_point, length=sizes[i], color=sd.COLOR_WHITE, factor_a=factor_a[i],
+                             factor_b=factor_b[i], factor_c=factor_c[i])
+                continue
+
+            wind = sd.random_number(-5, 5)
+            center_point = sd.get_point(x_cords[i] - wind, y_cords[i])
+            sd.snowflake(center=center_point, length=sizes[i], color=sd.COLOR_WHITE, factor_a=factor_a[i],
+                         factor_b=factor_b[i], factor_c=factor_c[i])
+            y_cords[i] -= sd.random_number(10, 10)
+
+        if max(y_cords) < 15:
             break
-        generate(y_0)
+        sd.sleep(0.1)
         if sd.user_want_exit():
             break
-
-generate(300)
-
-
-# while True:
-#     sd.clear_screen()
-#     for x in x:
-#         point = sd.get_point(x, y)
-#         sd.snowflake(center=point, length=50)
-#
-#         sd.sleep(0.1)
-#
-#     if sd.user_want_exit():
-#         break
-
-# y = 500
-# x = 100
-#
-# y2 = 450
-# x2 = 150
-# while True:
-#     sd.clear_screen()
-#     point = sd.get_point(x, y)
-#     sd.snowflake(center=point, length=50)
-#     y -= 10
-#     if y < 50:
-#        break
-#     x = x + 10
-#
-#     point2 = sd.get_point(x2, y2)
-#     sd.snowflake(center=point2, length=30)
-#     y2 -= 10
-#     if y2 < 50:
-#        break
-#     x2 = x2 + 20
-#
-#     sd.sleep(0.1)
-#     if sd.user_want_exit():
-#         break
-
-
 sd.pause()
 
 # подсказка! для ускорения отрисовки можно
